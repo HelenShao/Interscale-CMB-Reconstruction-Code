@@ -1,0 +1,10 @@
+# Not shipped on GitHub (large artifacts / internal notes)
+/DATA/
+/docs/
+/checkpoints/
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
