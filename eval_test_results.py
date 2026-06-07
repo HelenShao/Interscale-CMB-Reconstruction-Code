@@ -862,14 +862,14 @@ def find_model_path(norm_suffix, channel_suffix, normalize, stats_file=STATS_FIL
     if os.path.exists(best_model_path):
         return best_model_path
     elif os.path.exists(model_dir):
-        model_files = [f for f in os.listdir(model_dir) if f.endswith('.pt')]
-        if model_files:
-            model_path = os.path.join(model_dir, model_files[0])
+            model_files = [f for f in os.listdir(model_dir) if f.endswith('.pt')]
+            if model_files:
+                model_path = os.path.join(model_dir, model_files[0])
             print(f'  Warning: Using {model_files[0]} instead of best_model')
-            return model_path
-        else:
+                return model_path
+            else:
             raise FileNotFoundError(f'No model found in {model_dir}')
-    else:
+        else:
         raise FileNotFoundError(f'Model directory not found: {model_dir}')
 
 def _save_loaded_test_tensors_multifreq(path, test_X, test_y, test_ilc_cmb, test_cmb_draw, test_indices_final, norm_stats, normalized, use_ilc, use_b_small, use_e_t, in_channels, channel_suffix):
@@ -1370,13 +1370,13 @@ def main():
         if os.path.exists(best_model_path):
             model_path = best_model_path
         elif os.path.exists(model_dir):
-            model_files = [f for f in os.listdir(model_dir) if f.endswith('.pt')]
-            if model_files:
-                model_path = os.path.join(model_dir, model_files[0])
+                model_files = [f for f in os.listdir(model_dir) if f.endswith('.pt')]
+                if model_files:
+                    model_path = os.path.join(model_dir, model_files[0])
                 print(f'\nWarning: Using {model_files[0]} instead of best_model')
-            else:
+                else:
                 raise FileNotFoundError(f'No model found in {model_dir}')
-        else:
+            else:
             raise FileNotFoundError(f'Model directory not found: {model_dir}')
     (model, device) = load_model(model_path, normalize=args.normalize, in_channels=in_channels)
     (predictions, targets) = generate_predictions(model, test_X, test_y, device, batch_size=CONFIG['batch_size'])
@@ -1445,10 +1445,10 @@ def main():
     if hybrid_npz_bundle is not None:
         b_all_scales = hybrid_npz_bundle['test_b_all_scales_220']
         print(f'  Using patches from --test-data-npz, shape: {b_all_scales.shape}')
-    else:
-        if not os.path.exists(b_all_scales_file):
+        else:
+    if not os.path.exists(b_all_scales_file):
             raise FileNotFoundError(f'B all-scales file not found: {b_all_scales_file}')
-        b_all_scales_full = np.load(b_all_scales_file)
+    b_all_scales_full = np.load(b_all_scales_file)
         print(f'  Full dataset shape: {b_all_scales_full.shape}')
         b_all_scales = b_all_scales_full[test_indices_final]
     print(f'  Test set shape (using test_indices): {b_all_scales.shape}')
