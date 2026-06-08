@@ -1,6 +1,6 @@
 # Code release: signal-preserving CMB foreground modeling (ICML submission)
 
-This folder contains the scripts used to train U-Nets, evaluate test patches, and regenerate figures. **This repo omits `DATA/`, `docs/`, and `checkpoints/` (large or internal files).** Obtain data from your supplementary / archival release. **Pretrained `.pt` weights** are shared separately (anonymous Google Drive folder): [ICML_AI4PHYSICS checkpoints](https://drive.google.com/drive/folders/1fGdGXZSukeqtr_QxOT10rJRp5Df2Dlrf?usp=drive_link). Download them into `code_release/checkpoints/`, preserving the `singlefreq/` and `hybrid/` layout used in the `--model-path` examples below. Locally, set `ILC_ML_DATA_ROOT` to a tree matching `paths_config.py`, or keep a `DATA/` directory next to these scripts. For dependencies, see `ENVIRONMENT.md`.
+This folder contains the scripts used to train U-Nets, evaluate test patches, and reproduce figures. **This repo does not contain subdirs `DATA/`, `docs/`, and `checkpoints/` due to their large sizes.** You can obtain **data** and **pretrained `.pt` weights** from: [ICML_AI4PHYSICS data and models](https://drive.google.com/drive/folders/1fGdGXZSukeqtr_QxOT10rJRp5Df2Dlrf?usp=drive_link). Download them into `code_release/checkpoints/`, preserving the `singlefreq/` and `hybrid/` layout used in the `--model-path` examples below. Locally, set `ILC_ML_DATA_ROOT` to a tree matching `paths_config.py`, or keep a `DATA/` directory next to these scripts. For dependencies, see `ENVIRONMENT.md`.
 
 ## Layout
 
