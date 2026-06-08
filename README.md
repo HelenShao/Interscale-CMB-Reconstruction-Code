@@ -27,12 +27,36 @@ See `ENVIRONMENT.md` for dependencies.
 
 ## Training and evaluation steps
 
-1. Obtain DustFilaments foreground patches, CMB draws, **`ILC_products/`**, and normalization `.npz` files (see archival data release).
-2. **Train** (examples):  
+1. Obtain DustFilaments foreground patches, CMB draws, **`ILC_products/`**, and normalization `.npz` files
+   ## Data downloads
+
+| File | Size (approx.) | Download |
+|------|----------------|----------|
+| Evaluation Data (`teb_nonorm.npz`, `full_16ch_nonorm.npz`) | ~55 GB | `ICML2026_AI4PHYSICS_eval_exports.zip` |
+| Checkpoints (`singlefreq/`, `hybrid/`) | ~2.8 GB | `ICML2026_AI4PHYSICS_checkpoints.zip` |
+
+**ZIP Files**
+- `ICML2026_AI4PHYSICS_eval_exports.zip`: `5c5fe2f9ef00210b99dcedb41f59834c82293de0fbc5b2bdfff5bdff3e8c1708`
+- `ICML2026_AI4PHYSICS_checkpoints.zip`: `149bc39201289471e0e91ffa65a2b097e8f445bd178a179edd87f2fbe4950d9a`
+
+### Setup
+
+```bash
+unzip ICML2026_AI4PHYSICS_eval_exports.zip -d eval_exports
+unzip ICML2026_AI4PHYSICS_checkpoints.zip
+
+python eval_test_results_singlefreq.py --no-viz \
+  --test-data-npz eval_exports/singlefreq/teb_nonorm.npz \
+  --model-path checkpoints/singlefreq/te_plus_e_plus_bs_nonorm.pt
+
+python eval_test_results.py --no-viz --add-e-t \
+  --test-data-npz eval_exports/hybrid/full_16ch_nonorm.npz \
+  --model-path checkpoints/hybrid/ilc_fg_plus_bs_plus_te_fourfreq_nonorm.pt
+3. **Train** (examples):  
    `python train_unet_singlefreq.py --no-normalize`  
    `python train_unet_interscale.py --no-normalize`  
    `python train_unet_interscale.py --add-e-t --no-normalize`
-3. **Evaluate**:
+4. **Evaluate**:
    **From exported `.npz`** : pass `--test-data-npz` with the path to the evaluation bundle, the same channel options as the checkpoint, and `--model-path`:
    ```bash
    python eval_test_results_singlefreq.py --no-viz --test-data-npz path/to/teb_nonorm.npz --model-path checkpoints/singlefreq/te_plus_e_plus_bs_nonorm.pt
@@ -45,7 +69,7 @@ See `ENVIRONMENT.md` for dependencies.
 - **Training:** `train_unet_*.py`scripts  (channel flags: `--b-only`, `--ilc-only`, `--add-e-t`, `--no-normalize`, etc.).
 - **Evaluation:** `eval_test_results*.py` flags and `--model-path` to the saved `best_model_*.pt`.
 
-**Pretrained checkpoints:** ~2.8 GB total (`singlefreq/` + `hybrid/`). Not stored in this repository—download from [this shared folder](https://drive.google.com/drive/folders/1fGdGXZSukeqtr_QxOT10rJRp5Df2Dlrf?usp=drive_link) and unpack under `checkpoints/`.
+**Pretrained checkpoints:** ~2.8 GB total (`singlefreq/` + `hybrid/`). Not stored in this repository—download from [this shared folder](https://drive.google.com/drive/folders/1fGdGXZSukeqtr_QxOT10rJRp5Df2Dlrf?usp=drive_link) and unpack under `checkpoints/` (see instructions above).
 
 ## Reproducing plots
 
