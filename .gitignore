@@ -1,6 +1,5 @@
-# Not shipped on GitHub (large artifacts / internal notes)
+# Not shipped on GitHub (large artifacts)
 /DATA/
-/docs/
 /checkpoints/
 
 # Python
